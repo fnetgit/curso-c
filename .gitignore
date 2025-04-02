@@ -1,0 +1,10 @@
+# Ignorar todos os arquivos sem extensão
+*
+
+# Permitir arquivos que possuem uma extensão
+!*.*
+
+# Garantir que o próprio .gitignore seja rastreado
+!.gitignore
+
+/.vscode
