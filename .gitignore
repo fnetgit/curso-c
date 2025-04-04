@@ -7,4 +7,8 @@
 # Garantir que o próprio .gitignore seja rastreado
 !.gitignore
 
+# Garantir que o Makefile seja rastreado
+!Makefile
+
 /.vscode
+/executaveis
