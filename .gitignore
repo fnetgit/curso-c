@@ -1,10 +1,20 @@
-# Ignorar todos os arquivos sem extensão
-*
+# Ignora pastas de configuração e binários
+.vscode/
+executaveis/
+build/
+bin/
+obj/
 
-# Permitir arquivos que possuem uma extensão
-!*.*
+# Ignora arquivos binários e objetos em qualquer lugar
+*.o
+*.out
+*.exe
+*.bin
 
-# Garantir que o próprio .gitignore seja rastreado
+# Não ignora arquivos importantes
 !.gitignore
+!Makefile
 
-/.vscode
+# (Opcional) ignora backups do VS Code ou editores
+*~
+*.swp

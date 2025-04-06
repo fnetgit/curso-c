@@ -10,6 +10,7 @@
 // \? interrogação
 // \a ou \7 beep
 // %% porcentagem
+/* comentário de múltiplas linhas */
 
 void main() {
     setlocale(LC_ALL, "Portuguese");
