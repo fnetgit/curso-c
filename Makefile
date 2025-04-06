@@ -1,7 +1,7 @@
 # Variáveis
 SRC = $(wildcard *.c)
 BIN = executaveis
-EXEC = $(patsubst %.c, $(BIN)/%, $(SRC)) # Corrige os executáveis
+EXEC = $(patsubst %.c, $(BIN)/%, $(SRC))
 
 # Regra padrão: compilar todos os arquivos
 all: $(EXEC)
@@ -38,7 +38,6 @@ clean:
 	rm -rf $(BIN)
 
 
-
 # O make é uma ferramenta que automatiza a compilação de programas, especialmente os 
 # escritos em linguagens como C e C++. Ele lê um arquivo chamado Makefile, 
 # que contém regras sobre como compilar e construir o programa.
@@ -50,7 +49,8 @@ clean:
 # 4. Automatiza tarefas → Pode rodar testes, limpar arquivos, etc.
 
 # ---------------------Comandos do código acima-----------------------------
-# Compilar e rodar arquivo:                  make run
-# Compilar e rodar todos os executáveis:     make run-all
-# Compilar e rodar um arquivo direto:        make nome_arquivo (ex: make saida_formatada)
-# Limpar todos os executáveis:               make clean
+# Compilar um arquivo específico: make meu_programa
+# Compilar todos os programas:    make
+# Rodar o último compilado:       make run
+# Rodar todos os executáveis:     make run-all
+# Limpar todos os executaveis:    make clean
