@@ -1,21 +1,19 @@
-# Variáveis
-SRC = $(wildcard *.c)
+# Pasta onde os executáveis serão salvos
 BIN = executaveis
-EXEC = $(patsubst %.c, $(BIN)/%, $(SRC))
 
-# Regra padrão: compilar todos os arquivos
-all: $(EXEC)
+# Compilar e rodar diretamente com: make nome (ex: make hello)
+# Esse comando procura pelo arquivo nome.c em QUALQUER subpasta,
+# compila para executaveis/nome e executa.
 
-# Compilar arquivos individuais
-$(BIN)/%: %.c
+%:
 	@mkdir -p $(BIN)
-	@gcc -Wall -Wextra -g $< -o $@
-
-# Compilar e rodar diretamente com: make nome (ex: make saida_formatada)
-%: %.c
-	@mkdir -p $(BIN)
-	@gcc -Wall -Wextra -g $< -o $(BIN)/$@
-	@./$(BIN)/$@
+	@src_file=$$(find . -type f -name "$@.c" | head -n 1); \
+	if [ -z "$$src_file" ]; then \
+		echo "Arquivo '$@.c' não encontrado."; \
+	else \
+		echo "Compilando $$src_file → $(BIN)/$@"; \
+		gcc -Wall -Wextra -g $$src_file -o $(BIN)/$@ && ./$(BIN)/$@; \
+	fi
 
 # Rodar um programa sem recompilar se ele já existir
 run:
@@ -23,15 +21,8 @@ run:
 	if [ -f "$(BIN)/$$name" ]; then \
 		"./$(BIN)/$$name"; \
 	else \
-		make "$(BIN)/$$name" && "./$(BIN)/$$name"; \
+		echo "Executável não encontrado."; \
 	fi'
-
-# Rodar todos os executáveis compilados
-run-all: all
-	@for bin in $(EXEC); do \
-		echo "Executando $$bin..."; \
-		./$$bin; \
-	done
 
 # Apagar os arquivos compilados
 clean:
@@ -49,8 +40,7 @@ clean:
 # 4. Automatiza tarefas → Pode rodar testes, limpar arquivos, etc.
 
 # ---------------------Comandos do código acima-----------------------------
-# Compilar um arquivo específico: make meu_programa
-# Compilar todos os programas:    make
-# Rodar o último compilado:       make run
-# Rodar todos os executáveis:     make run-all
-# Limpar todos os executaveis:    make clean
+# Compilar e rodar um arquivo:      make nome_do_arquivo (ex: make hello)
+# Executáveis ficam em:             executaveis/
+# Rodar um já compilado:            make run
+# Limpar todos os executáveis:      make clean
